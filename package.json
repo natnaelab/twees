@@ -2,9 +2,10 @@
   "name": "twitter-clone",
   "version": "1.0.0",
   "description": "Twitter-like web application",
-  "main": "src/app.js",
+  "main": "server/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon server/index.js",
+    "start": "node server/in.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,19 @@
   "bugs": {
     "url": "https://github.com/natnaelab/twitter-clone/issues"
   },
-  "homepage": "https://github.com/natnaelab/twitter-clone#readme"
+  "homepage": "https://github.com/natnaelab/twitter-clone#readme",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.5",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "nodemon": "^2.0.2"
+  }
 }
