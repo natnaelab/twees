@@ -7,3 +7,5 @@ const register = require("../controllers/register.auth"); // REGISTER/SIGN UP CO
 // @desc        register new user
 // @access      public
 router.post("/register", register);
+
+module.exports = router;
