@@ -1,8 +1,10 @@
 const express = require("express");
 const logger = require("morgan");
 const compression = require("compression");
+const passport = require("passport");
 
 require("./api/config/mongoose");
+require("./api/config/passport")(passport);
 
 const app = express();
 
