@@ -1,0 +1,19 @@
+{
+  "name": "twitter-clone",
+  "version": "1.0.0",
+  "description": "Twitter-like web application",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/natnaelab/twitter-clone.git"
+  },
+  "author": "Natnael Abrham",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/natnaelab/twitter-clone/issues"
+  },
+  "homepage": "https://github.com/natnaelab/twitter-clone#readme"
+}
