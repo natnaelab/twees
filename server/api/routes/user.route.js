@@ -2,9 +2,9 @@ const router = require("express").Router();
 const passport = require("passport");
 
 // controller files
-const register = require("../controllers/register.auth"); // REGISTER/SIGN UP CONTROLLER
-const login = require("../controllers/login.auth"); // LOGIN CONTROLLER
-const session = require("../controllers/session.auth"); // CURRENT USER SESSION CONTROLLER
+const register = require("../controllers/register.user"); // REGISTER/SIGN UP CONTROLLER
+const login = require("../controllers/login.user"); // LOGIN CONTROLLER
+const session = require("../controllers/session.user"); // CURRENT USER SESSION CONTROLLER
 
 // @route       POST /api/auth/register
 // @desc        register new user

@@ -2,8 +2,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // import login validator
-const { validateLoginInput } = require("../validator/auth.validator");
-const User = require("../models/auth.model");
+const { validateLoginInput } = require("../validator/user.validator");
+const User = require("../models/user.model");
 
 module.exports = (req, res) => {
   // validate login form
