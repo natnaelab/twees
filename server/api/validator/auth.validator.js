@@ -18,6 +18,10 @@ module.exports = {
       ? data.confirm_password
       : "";
 
+    // check if username isn't alphanumeric
+    !validator.isAlphanumeric(data.username) &&
+      (errors.username = "username should contain only letters and numbers");
+
     // check username chars length
     !validator.isLength(data.username, { min: 4, max: 12 }) &&
       (errors.username = "username characters length should be between 4 & 12");
