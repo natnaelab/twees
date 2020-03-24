@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const saveAv = require("../utils/saveAv");
 
 const { validateRegisterInput } = require("../validator/auth.validator");
 const User = require("../models/user.model");
@@ -12,11 +13,15 @@ module.exports = (req, res) => {
 
   const { username, password, confirm_password } = req.body;
 
+  // create user avatar
+  saveAv(username);
+
   // create new user object
   const newUser = new User({
     username,
     password,
-    confirm_password
+    confirm_password,
+    avatar: `/avatar/${username}.png`
   });
 
   // password hashing
@@ -40,12 +45,10 @@ module.exports = (req, res) => {
           errors.username = "username has already been taken!";
           res.status(403).json({ status: "error", errors });
         } else {
-          res
-            .status(500)
-            .json({
-              status: "error",
-              message: "An error occured trying to process your request"
-            });
+          res.status(500).json({
+            status: "error",
+            message: "An error occured trying to process your request"
+          });
         }
       });
   });
