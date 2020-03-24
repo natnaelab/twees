@@ -2,6 +2,7 @@ const express = require("express");
 const logger = require("morgan");
 const compression = require("compression");
 const passport = require("passport");
+const path = require("path");
 
 require("./api/config/mongoose");
 require("./api/config/passport")(passport);
@@ -9,7 +10,7 @@ require("./api/config/passport")(passport);
 const app = express();
 
 // serve static files
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, "public")));
 
 // MIDDLEWARE FUNCTIONS
 app.use(logger("dev"));
