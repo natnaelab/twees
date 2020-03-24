@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 // import login validator
 const { validateLoginInput } = require("../validator/auth.validator");
-const User = require("../models/user.model");
+const User = require("../models/auth.model");
 
 module.exports = (req, res) => {
   // validate login form

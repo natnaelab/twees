@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const saveAv = require("../utils/saveAv");
 
 const { validateRegisterInput } = require("../validator/auth.validator");
-const User = require("../models/user.model");
+const User = require("../models/auth.model");
 
 module.exports = (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
