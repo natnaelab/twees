@@ -14,9 +14,6 @@ module.exports = (req, res) => {
   let { username, password, confirm_password } = req.body;
   username = username.toLowerCase();
 
-  // create user avatar
-  saveAv(username);
-
   // create new user object
   const newUser = new User({
     username,
@@ -30,27 +27,28 @@ module.exports = (req, res) => {
     bcrypt.hash(newUser.password, salt, (err, hash) => {
       if (err) throw err;
       newUser.password = hash;
-    });
 
-    // save new user to db
-    newUser
-      .save()
-      .then(_ =>
-        res.json({
-          status: "success",
-          message: "registration was successfull!"
-        })
-      )
-      .catch(err => {
-        if (err.errors.username && err.errors.username.kind == "unique") {
-          errors.username = "username has already been taken!";
-          res.status(403).json({ status: "error", errors });
-        } else {
-          res.status(500).json({
-            status: "error",
-            message: "An error occured trying to process your request"
+      // save new user to db
+      newUser
+        .save()
+        .then(_ => {
+          saveAv(username);
+          res.json({
+            status: "success",
+            message: "registration was successfull!"
           });
-        }
-      });
+        })
+        .catch(err => {
+          if (err.errors.username && err.errors.username.kind == "unique") {
+            errors.username = "username has already been taken!";
+            res.status(403).json({ status: "error", errors });
+          } else {
+            res.status(500).json({
+              status: "error",
+              message: "An error occured trying to process your request"
+            });
+          }
+        });
+    });
   });
 };
