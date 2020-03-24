@@ -30,8 +30,7 @@ module.exports = (req, res) => {
 
         let payload = {
           id: user._id,
-          username: user.username,
-          avatar: user.avatar
+          username: user.username
         }; // jwt payload
 
         jwt.sign(payload, process.env.jwtSecret, (err, token) => {

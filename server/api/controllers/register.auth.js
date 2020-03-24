@@ -18,8 +18,7 @@ module.exports = (req, res) => {
   const newUser = new User({
     username,
     password,
-    confirm_password,
-    avatar: `/avatar/${username}.png`
+    confirm_password
   });
 
   // password hashing
