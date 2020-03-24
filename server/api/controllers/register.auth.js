@@ -11,7 +11,8 @@ module.exports = (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const { username, password, confirm_password } = req.body;
+  let { username, password, confirm_password } = req.body;
+  username = username.toLowerCase();
 
   // create user avatar
   saveAv(username);
