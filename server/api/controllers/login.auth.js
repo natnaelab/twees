@@ -27,7 +27,11 @@ module.exports = (req, res) => {
         // user & pass was correct
         // sign jwt token
 
-        let payload = { id: user._id, username: user.username }; // jwt payload
+        let payload = {
+          id: user._id,
+          username: user.username,
+          avatar: user.avatar
+        }; // jwt payload
 
         jwt.sign(payload, process.env.jwtSecret, (err, token) => {
           res.json({ status: "success", token: "Bearer " + token });
