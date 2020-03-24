@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const passport = require("passport");
 
 // controller files
 const register = require("../controllers/register.auth"); // REGISTER/SIGN UP CONTROLLER
@@ -18,6 +19,10 @@ router.post("/login", login);
 // @route       GET /api/auth/session
 // @desc        get current logged in user
 // @access      private
-router.get("/session", session);
+router.get(
+  "/session",
+  passport.authenticate("jwt", { session: false }),
+  session
+);
 
 module.exports = router;
