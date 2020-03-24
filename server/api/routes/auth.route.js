@@ -3,7 +3,7 @@ const router = require("express").Router();
 // controller files
 const register = require("../controllers/register.auth"); // REGISTER/SIGN UP CONTROLLER
 const login = require("../controllers/login.auth"); // LOGIN CONTROLLER
-const session = require("../controllers/session.auth"); // LOGIN CONTROLLER
+const session = require("../controllers/session.auth"); // CURRENT USER SESSION CONTROLLER
 
 // @route       POST /api/auth/register
 // @desc        register new user
@@ -15,9 +15,9 @@ router.post("/register", register);
 // @access      public
 router.post("/login", login);
 
-// @route       POST /api/auth/register
-// @desc        register new user
+// @route       GET /api/auth/session
+// @desc        get current logged in user
 // @access      private
-router.post("/session", session);
+router.get("/session", session);
 
 module.exports = router;
