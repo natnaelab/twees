@@ -13,13 +13,14 @@ module.exports = (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const { username, password } = req.body;
+  let { username, password } = req.body;
+  username = username.toLowerCase();
 
   User.findOne({ username }).then(user => {
     // check if user exist
     if (!user) {
       errors.username = "user not found";
-      res.status(404).json(errors);
+      return res.status(404).json(errors);
     }
 
     bcrypt.compare(password, user.password).then(match => {
