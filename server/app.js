@@ -8,6 +8,9 @@ require("./api/config/passport")(passport);
 
 const app = express();
 
+// serve static files
+app.use(express.static("public"));
+
 // MIDDLEWARE FUNCTIONS
 app.use(logger("dev"));
 app.use(express.json());
