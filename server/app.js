@@ -20,8 +20,10 @@ app.use(compression());
 
 // routes
 const auth = require("./api/routes/user.route");
+const post = require("./api/routes/post.route");
 
-app.use("/api/auth", auth);
+app.use("/api/auth", auth); // user authorization route
+app.use("/api/post", post); // post route
 
 // Error handling
 app.use((req, res, next) => {
