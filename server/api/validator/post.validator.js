@@ -12,14 +12,16 @@ module.exports = {
 
     data.text = !isEmpty(data.username) ? data.username : "";
 
-    // check post chars length
-    !validator.isLength(data.text, { max: 700 }) &&
-      (errors.text = "maximum character limit");
+    // check post text or caption chars length
+    !validator.isLength(data.text || data.pic.caption || data.vid.caption, {
+      max: 700
+    }) && (errors.text = "maximum character limit");
 
-    // check if username field is empty
-    validator.isEmpty(data.text) && (errors.text = "text field is required!");
+    // check if post text or caption field is empty
+    validator.isEmpty(data.text || data.pic.caption || data.vid.caption) &&
+      (errors.text = "required field!");
 
-    // return errors object if the form is invalid
+    // return error if the form is invalid
     return {
       errors,
       isValid: isEmpty(errors)
