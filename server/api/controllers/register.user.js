@@ -1,5 +1,5 @@
 const bcrypt = require("bcryptjs");
-const saveAv = require("../utils/saveAv");
+const avatar = require("../utils/avatar");
 
 const { validateRegisterInput } = require("../validator/user.validator");
 const User = require("../models/user.model");
@@ -18,7 +18,8 @@ module.exports = (req, res) => {
   const newUser = new User({
     username,
     password,
-    confirm_password
+    confirm_password,
+    avatar: avatar(username)
   });
 
   // password hashing
@@ -31,7 +32,6 @@ module.exports = (req, res) => {
       newUser
         .save()
         .then(_ => {
-          saveAv(username);
           res.json({
             status: "success",
             message: "registration was successfull!"
