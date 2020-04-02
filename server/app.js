@@ -13,10 +13,15 @@ const app = express();
 app.use(express.static(path.join(__dirname, "public")));
 
 // MIDDLEWARE FUNCTIONS
-app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(logger("dev"));
 app.use(compression());
+
+// root route
+app.use("/", (req, res) => {
+  res.send("OK");
+});
 
 // routes
 const auth = require("./api/routes/user.route");
