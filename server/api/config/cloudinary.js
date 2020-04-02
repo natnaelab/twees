@@ -6,17 +6,23 @@ const {
   cloudinary_api_secret
 } = process.env;
 
-cloudinary.config({
-  cloud_name: cloudinary_cloud_name,
-  api_key: cloudinary_api_key,
-  api_secret: cloudinary_api_secret
-});
-
-module.exports = file => {
-  cloudinary.uploader.upload(
-    file => result => {
-      return { url: result.url };
-    },
-    { resource_type: "auto" }
-  );
+module.exports = (path, username, fileType) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.config({
+      cloud_name: cloudinary_cloud_name,
+      api_key: cloudinary_api_key,
+      api_secret: cloudinary_api_secret
+    });
+    cloudinary.uploader.upload(
+      path,
+      {
+        resource_type: "auto",
+        folder: `posts/${fileType}/${username}`
+      },
+      (err, res) => {
+        if (err) reject(err);
+        resolve(res);
+      }
+    );
+  });
 };
