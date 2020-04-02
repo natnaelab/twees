@@ -19,7 +19,7 @@ app.use(logger("dev"));
 app.use(compression());
 
 // root route
-app.use("/", (req, res) => {
+app.get("/", (req, res) => {
   res.send("OK");
 });
 
