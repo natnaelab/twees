@@ -17,7 +17,7 @@ module.exports = (path, username, fileType) => {
       path,
       {
         resource_type: "auto",
-        folder: `posts/${fileType}/${username}`
+        folder: `posts/${username}/${fileType}`
       },
       (err, res) => {
         if (err) reject(err);
