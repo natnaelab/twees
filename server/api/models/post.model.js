@@ -4,8 +4,8 @@ const postSchema = new Schema({
   user: { type: Schema.Types.ObjectId, ref: "user" },
   type: { type: String, enum: ["text", "pic", "vid"] },
   text: String,
-  pic: [{ caption: String, uri: String }],
-  vid: [{ caption: String, uri: String }],
+  pic: Array,
+  vid: Array,
   edited: { type: Boolean, default: false }
 });
 
