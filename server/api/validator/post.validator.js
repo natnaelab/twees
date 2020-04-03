@@ -8,7 +8,7 @@ module.exports = {
    * post-body (text)
    * captions (pic/vid)
    */
-  validatePostInput: data => {
+  validatePostInput: (data) => {
     let errors = {};
 
     if (data.text) data.text = !isEmpty(data.text) ? data.text : "";
@@ -20,7 +20,7 @@ module.exports = {
     // check text chars length
     data.text &&
       !validator.isLength(data.text, {
-        max: 400
+        max: 400,
       }) &&
       (errors.text = "you can't post more than 400 characters");
 
@@ -31,18 +31,18 @@ module.exports = {
 
     data.pic &&
       !isEmpty(data.pic.caption) &&
-      !validator.isLength(data.pic.caption, { max: 400 }) &&
+      !validator.isLength(data.pic.caption, { max: 200 }) &&
       (errors.pic = "you can't use more than 400 characters");
 
     data.vid &&
       !isEmpty(data.vid.caption) &&
-      !validator.isLength(data.vid.caption) &&
+      !validator.isLength(data.vid.caption, { max: 200 }) &&
       (errors.vid = "you can't use more than 400 characters");
 
     // return error if the form is invalid
     return {
       errors,
-      isValid: isEmpty(errors)
+      isValid: isEmpty(errors),
     };
-  }
+  },
 };
