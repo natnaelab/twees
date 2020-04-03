@@ -21,10 +21,10 @@ module.exports = (req, res) => {
     post.type = "text";
     return new Post(post)
       .save()
-      .then(resp => {
+      .then(() => {
         res.json({ status: "success" });
       })
-      .catch(err => {
+      .catch((err) => {
         res.status(400).json({ status: "error", message: err.message });
       });
   } else if (req.file) {
@@ -37,23 +37,23 @@ module.exports = (req, res) => {
         delete post.caption;
       }
       cloudUpload(req.file.path, req.user.username, "image")
-        .then(resp => {
+        .then((resp) => {
           fs.unlinkSync(req.file.path);
           pic.url = resp.url;
+          post.pic = pic;
           return new Post(post)
             .save()
-            .then(_ => {
+            .then((_) => {
               res.json({ status: "success" });
             })
-            .catch(err => {
+            .catch((err) => {
               res.status(400).json({ status: "error", message: err.message });
             });
         })
-        .catch(err => {
+        .catch((err) => {
           if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
           res.status(400).json(err);
         });
-      post.pic = pic;
     } else if (mimetype.includes("video")) {
       post.type = "vid";
       let vid = {};
@@ -62,23 +62,23 @@ module.exports = (req, res) => {
         delete post.caption;
       }
       cloudUpload(req.file.path, req.user.username, "video")
-        .then(resp => {
+        .then((resp) => {
           fs.unlinkSync(req.file.path);
           vid.url = resp.url;
+          post.vid = vid;
           res.json(post);
         })
-        .catch(err => {
+        .catch((err) => {
           if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
           return new Post(post)
             .save()
-            .then(_ => {
+            .then((_) => {
               res.json({ status: "success" });
             })
-            .catch(err => {
+            .catch((err) => {
               res.status(400).json({ status: "error", message: err.message });
             });
         });
-      post.vid = vid;
     }
   }
 };
