@@ -1,6 +1,6 @@
 // auth form validation
 const validator = require("validator").default;
-const isEmpty = require("./isEmpty");
+const isEmpty = require("./../utils/isEmpty");
 
 module.exports = {
   /**
