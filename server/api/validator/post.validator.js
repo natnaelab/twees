@@ -29,15 +29,10 @@ module.exports = {
       validator.isEmpty(data.text) &&
       (errors.text = "text field is required");
 
-    data.pic &&
-      !isEmpty(data.pic.caption) &&
-      !validator.isLength(data.pic.caption, { max: 200 }) &&
-      (errors.pic = "you can't use more than 400 characters");
-
-    data.vid &&
-      !isEmpty(data.vid.caption) &&
-      !validator.isLength(data.vid.caption, { max: 200 }) &&
-      (errors.vid = "you can't use more than 400 characters");
+    data.caption &&
+      !isEmpty(data.caption) &&
+      !validator.isLength(data.caption, { max: 200 }) &&
+      (errors.caption = "you can't use more than 200 characters");
 
     // return error if the form is invalid
     return {
