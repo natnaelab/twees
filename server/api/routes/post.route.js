@@ -5,7 +5,7 @@ const upload = require("../config/multer");
 // controller files
 const newPost = require("../controllers/new.post"); // new post
 const { getAll, getById, getByUser } = require("../controllers/get.post"); // get posts
-// delete post
+const deletePost = require("../controllers/delete.post"); // delete post
 // edit post
 
 // @route       POST /api/post
@@ -27,5 +27,10 @@ router.get("/user/:user", privateRoute, getByUser);
 // @desc        get all posts by post ID
 // @access      private
 router.get("/:id", privateRoute, getById);
+
+// @route       DELETE /api/post/:id
+// @desc        delete post
+// @access      private
+router.delete("/:id", privateRoute, deletePost);
 
 module.exports = router;
