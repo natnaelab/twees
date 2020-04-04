@@ -6,6 +6,7 @@ const cloudUpload = require("../config/cloudinary");
 
 module.exports = (req, res) => {
   let post = {};
+  post.posted_by = req.user.id;
   Object.assign(post, req.body);
 
   const { errors, isValid } = validatePostInput(req.body);
@@ -52,7 +53,7 @@ module.exports = (req, res) => {
         })
         .catch((err) => {
           if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
-          res.status(400).json(err);
+          res.status(400).json({ status: "error", message: err.message });
         });
     } else if (mimetype.includes("video")) {
       post.type = "vid";
@@ -66,10 +67,6 @@ module.exports = (req, res) => {
           fs.unlinkSync(req.file.path);
           vid.url = resp.url;
           post.vid = vid;
-          res.json(post);
-        })
-        .catch((err) => {
-          if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
           return new Post(post)
             .save()
             .then((_) => {
@@ -78,6 +75,10 @@ module.exports = (req, res) => {
             .catch((err) => {
               res.status(400).json({ status: "error", message: err.message });
             });
+        })
+        .catch((err) => {
+          if (fs.existsSync(req.file.path)) fs.unlinkSync(req.file.path);
+          res.status(400).json({ status: "error", message: err.message });
         });
     }
   }
