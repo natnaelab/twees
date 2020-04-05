@@ -3,6 +3,7 @@ const Post = require("../models/post.model");
 module.exports = {
   getAll: (req, res) => {
     Post.find({}, "_id pic vid text type edited posted_by posted_at")
+      .sort({ posted_at: -1 })
       .populate("posted_by", "_id username avatar")
       .exec()
       .then((posts) => {
@@ -15,6 +16,7 @@ module.exports = {
   getByUser: (req, res) => {
     let posted_by = req.params.user;
     Post.find({ posted_by }, "_id pic vid text type edited posted_by posted_at")
+      .sort({ posted_at: -1 })
       .populate("posted_by", "_id username avatar")
       .exec()
       .then((posts) => {
