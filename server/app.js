@@ -4,6 +4,8 @@ const compression = require("compression");
 const passport = require("passport");
 const path = require("path");
 
+require("dotenv").config(); // load enviroment variables
+
 require("./api/config/mongoose");
 require("./api/config/passport")(passport);
 
@@ -41,8 +43,8 @@ app.use((error, req, res, next) => {
   res.status(error.status || 500);
   res.json({
     error: {
-      message: error.message
-    }
+      message: error.message,
+    },
   });
 });
 
