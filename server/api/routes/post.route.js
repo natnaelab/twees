@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const privateRoute = require("../middlewares/private_route");
-const upload = require("../config/multer");
 
 // controller files
 const newPost = require("../controllers/new.post"); // new post
@@ -11,12 +10,12 @@ const editPost = require("../controllers/edit.post"); // edit post
 // @route       POST /api/post
 // @desc        add new post
 // @access      private
-router.post("/", privateRoute, upload.single("upload"), newPost);
+router.post("/", privateRoute, newPost);
 
 // @route       GET /api/post
 // @desc        get all posts
-// @access      private
-router.get("/", privateRoute, getAll);
+// @access      public
+router.get("/", getAll);
 
 // @route       GET /api/post/user/:user
 // @desc        get all posts by user
